@@ -1,6 +1,6 @@
 # DHF-SDK
 
-DHF API wrapper
+Python SDK to integrate with DHFinance in minutes.
 
 ## Installation
 
