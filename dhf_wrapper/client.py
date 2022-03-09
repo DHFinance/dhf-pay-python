@@ -22,13 +22,13 @@ class PaymentClient(ServiceClient):
 
     def get_payment(self, payment_id: int, params: ListParamsDTO = None) -> Optional[dict]:
         url = self.make_full_url(f"{self.PAYMENT_URL}/{payment_id}")
-
-        return self._make_request(request=self.session.get, url=url, params=params.asdict())
+        params = params.asdict() if params else None
+        return self._make_request(request=self.session.get, url=url, params=params)
 
     def get_payments(self, params: ListParamsDTO = None) -> dict:
         url = self.make_full_url(self.PAYMENT_URL)
-
-        return self._make_request(request=self.session.get, url=url, params=params.asdict())
+        params = params.asdict() if params else None
+        return self._make_request(request=self.session.get, url=url, params=params)
 
 
 class TransactionClient(ServiceClient):
@@ -36,7 +36,7 @@ class TransactionClient(ServiceClient):
 
     MAX_RETRIES = 3
 
-    def get_transactions(self, params: TransactionParamsDTO) -> dict:
+    def get_transactions(self, params: TransactionParamsDTO = None) -> dict:
         url = self.make_full_url(self.TRANSACTION_URL)
-
-        return self._make_request(request=self.session.get, url=url, params=params.asdict())
+        params = params.asdict() if params else None
+        return self._make_request(request=self.session.get, url=url, params=params)

@@ -3,7 +3,7 @@ from pathlib import Path
 
 from setuptools import setup, find_packages
 
-install_requires = ["marshmallow>=3.14.1", "requests>=2.27.1"]
+install_requires = ["requests>=2.27.1", "nose>=1.3.7"]
 
 
 def read(*parts):
@@ -35,15 +35,14 @@ classifiers = [
     "Operating System :: Microsoft :: Windows",
     "Environment :: Web Environment",
     "Development Status :: 5 - Production/Stable",
-    "Topic :: SDK",
 ]
 
 setup(
     name="dhf-sdk",
     version=read_version(),
     description="API wrapper for DHFinance.",
-    long_description="\n\n".join((read("README.md"))),
-    long_description_content_type="text/markdown",
+    long_description="\n\n".join((read("README.rst"))),
+    long_description_content_type="text/x-rst",
     classifiers=classifiers,
     platforms=["macOS", "POSIX", "Windows"],
     author="Andrew Svetlov",
