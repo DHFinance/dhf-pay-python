@@ -10,7 +10,7 @@ from dhf_wrapper.entities.payment import PaymentDTO
 
 class TestPaymentClient(TestCase):
     @patch.object(Session, 'get')
-    def test_getting_payments_is_ok(self, mock_get):
+    def test_positive_getting_payments(self, mock_get):
         payments = [
             {
                 "data": [
@@ -41,7 +41,7 @@ class TestPaymentClient(TestCase):
         self.assertEqual(response, payments)
 
     @patch.object(Session, 'get')
-    def test_getting_payment_is_ok(self, mock_get):
+    def test_positive_getting_payment(self, mock_get):
         payment = {
             "data": [
                 {
@@ -70,7 +70,7 @@ class TestPaymentClient(TestCase):
         self.assertEqual(response, payment)
 
     @patch.object(Session, 'post')
-    def test_create_payment_is_ok(self, mock_post):
+    def test_positive_create_payment(self, mock_post):
         payment_id = {
             "id": 1
         }
@@ -91,3 +91,18 @@ class TestPaymentClient(TestCase):
         ))
 
         self.assertEqual(response, payment_id)
+
+    @patch.object(Session, 'post')
+    def test_negative_create_payment_without_params(self, mock_post):
+        payment_id = {
+            "id": 1
+        }
+
+        mocked_session = mock.MagicMock()
+        mocked_session.__enter__.return_value = mock.MagicMock(post=mock.MagicMock(return_value=payment_id), json=lambda: payment_id)
+        mock_post.return_value = mocked_session
+
+        payment_client = PaymentClient('http://example.com', token='xxxxx')
+
+        with self.assertRaises(TypeError) as e:
+            payment_client.create_payment()
