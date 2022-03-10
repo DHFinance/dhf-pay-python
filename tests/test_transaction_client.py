@@ -10,7 +10,7 @@ from dhf_wrapper.entities.transaction import TransactionParamsDTO
 
 class TestTransactionClient(TestCase):
     @patch.object(Session, 'get')
-    def test_getting_transactions_is_ok(self, mock_get):
+    def test_positive_getting_transactions(self, mock_get):
         transactions = [{
             "data": [
                 {
@@ -42,7 +42,7 @@ class TestTransactionClient(TestCase):
         self.assertEqual(response, transactions)
 
     @patch.object(Session, 'get')
-    def test_getting_transactions_connection_error(self, mock_get):
+    def test_negative_getting_transactions_connection_error(self, mock_get):
         transactions = [{
             "data": [
                 {
@@ -65,8 +65,7 @@ class TestTransactionClient(TestCase):
 
         transaction_client = TransactionClient('http://example.com', token='xxxxx')
 
-        response = transaction_client.get_transactions(
-            params=TransactionParamsDTO(limit=1)
-        )
-
-        self.assertEqual(response, transactions)
+        with self.assertRaises(ConnectionError) as e:
+            transaction_client.get_transactions(
+                params=TransactionParamsDTO(limit=1)
+            )
