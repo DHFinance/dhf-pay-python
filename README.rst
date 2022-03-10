@@ -30,21 +30,21 @@ Usage
 
     transaction_client = TransactionClient('http://example.com', token='xxxxx')
 
+    #Get transactions list
     transactions = transaction_client.get_transactions(
         params=TransactionParamsDTO(limit=1)
     )
 
     payment_client = PaymentClient('http://example.com', token='xxxxx')
 
+    #Get payments list
     payments = payment_client.get_payments()
+    #Get pyment by id
     payment = payment_client.get_payment(payment_id=1)
+    #Add new payment
     new_payment = payment_client.create_payment(payment=PaymentDTO(
-        store=2,
         amount=1234,
-        status='paid',
         comment="test",
-        type=1,
-        text="test",
     ))
 
 Run tests
