@@ -39,8 +39,10 @@ Usage
 
     #Get payments list
     payments = payment_client.get_payments()
-    #Get pyment by id
+    
+    #Get payments by id
     payment = payment_client.get_payment(payment_id=1)
+    
     #Add new payment
     new_payment = payment_client.create_payment(payment=PaymentDTO(
         amount=1234,
