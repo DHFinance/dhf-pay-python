@@ -27,21 +27,40 @@ class ServiceClient:
         self.session = self._create_client_session()
 
     def _dispose(self):
+        """
+        Class method to close user session
+        """
         self.session.close()
 
     def _create_client_session(self):
+        """
+        Class method to create client session
+        """
         session = requests.Session()
         session.auth = self._get_http_auth()
         return session
 
     def _get_http_auth(self):
+        """
+        Class method to resolve http authentication
+        """
         if self.token:
             return BearerAuth(self.token)
 
     def make_full_url(self, path: str) -> str:
+        """
+        Class method to make full url
+        :param path: str
+        :return: str
+        """
         return f"{self.base_url}{path}"
 
     def _make_request(self, request: Callable, retries=DEFAULT_MAX_RETRIES, **kwargs) -> dict:
+        """
+        Class method to make request
+        :param request: Callable
+        :return: dict
+        """
         try:
             with request(**kwargs) as resp:
                 resp.raise_for_status()

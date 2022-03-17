@@ -4,6 +4,11 @@ DHF-SDK
 
 Python SDK to integrate with DHFinance in minutes.
 
+
+Requirements
+===============
+Python 3.7
+
 Installation
 ===============
 
@@ -39,10 +44,10 @@ Usage
 
     #Get payments list
     payments = payment_client.get_payments()
-    
+
     #Get payments by id
     payment = payment_client.get_payment(payment_id=1)
-    
+
     #Add new payment
     new_payment = payment_client.create_payment(payment=PaymentDTO(
         amount=1234,

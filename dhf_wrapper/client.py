@@ -16,16 +16,32 @@ class PaymentClient(ServiceClient):
     MAX_RETRIES = 3
 
     def create_payment(self, payment: PaymentDTO) -> dict:
+        """
+        Class method to create a payment
+        :param payment: PaymentDTO object
+        :return: dict
+        """
         url = self.make_full_url(self.PAYMENT_URL)
 
         return self._make_request(request=self.session.post, url=url, json=payment.asdict())
 
     def get_payment(self, payment_id: int, params: ListParamsDTO = None) -> Optional[dict]:
+        """
+        Class method to get a payment by params
+        :param payment_id: int
+        :param params:  ListParamsDTO
+        :return: Optional
+        """
         url = self.make_full_url(f"{self.PAYMENT_URL}/{payment_id}")
         params = params.asdict() if params else None
         return self._make_request(request=self.session.get, url=url, params=params)
 
     def get_payments(self, params: ListParamsDTO = None) -> dict:
+        """
+        Class method to get a payments list
+        :param params:  ListParamsDTO
+        :return: dict
+        """
         url = self.make_full_url(self.PAYMENT_URL)
         params = params.asdict() if params else None
         return self._make_request(request=self.session.get, url=url, params=params)
@@ -37,6 +53,11 @@ class TransactionClient(ServiceClient):
     MAX_RETRIES = 3
 
     def get_transactions(self, params: TransactionParamsDTO = None) -> dict:
+        """
+        Class method to get a transactions list
+        :param params:  ListParamsDTO
+        :return: dict
+        """
         url = self.make_full_url(self.TRANSACTION_URL)
         params = params.asdict() if params else None
         return self._make_request(request=self.session.get, url=url, params=params)
