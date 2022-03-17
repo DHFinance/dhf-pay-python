@@ -15,7 +15,6 @@ class PaymentClient(ServiceClient):
 
     MAX_RETRIES = 3
 
-    @classmethod
     def create_payment(self, payment: PaymentDTO) -> dict:
         """
         Class method to create a payment
@@ -26,7 +25,6 @@ class PaymentClient(ServiceClient):
 
         return self._make_request(request=self.session.post, url=url, json=payment.asdict())
 
-    @classmethod
     def get_payment(self, payment_id: int, params: ListParamsDTO = None) -> Optional[dict]:
         """
         Class method to get a payment by params
@@ -38,7 +36,6 @@ class PaymentClient(ServiceClient):
         params = params.asdict() if params else None
         return self._make_request(request=self.session.get, url=url, params=params)
 
-    @classmethod
     def get_payments(self, params: ListParamsDTO = None) -> dict:
         """
         Class method to get a payments list
@@ -55,7 +52,6 @@ class TransactionClient(ServiceClient):
 
     MAX_RETRIES = 3
 
-    @classmethod
     def get_transactions(self, params: TransactionParamsDTO = None) -> dict:
         """
         Class method to get a transactions list
