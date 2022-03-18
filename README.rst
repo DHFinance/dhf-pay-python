@@ -4,13 +4,11 @@ DHF-SDK
 
 Python SDK to integrate with DHFinance in minutes.
 
-
-Requirements
+Getting Started
 ===============
-Python 3.7
-
-Installation
-===============
+1. **Sign up for DHFinance** - Before you begin, you need to sign up for an DHFinance account and retrieve your store API token.
+2. **Requirements** – To run the SDK, your system will need to have Python >= 3.7.
+3. **Install**
 
 Local build:
 
