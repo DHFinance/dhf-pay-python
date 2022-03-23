@@ -6,7 +6,7 @@ Python SDK to integrate with DHFinance in minutes.
 
 Getting Started
 ===============
-1. **Sign up** - Before you begin, you need to sign up for your payment gateway account (pay.dhfi.online for example) and retrieve your store API token (add Store - APIKey Generate).
+1. **Sign up** - Before you begin, you need to sign up for your payment gateway account ( https://pay.dhfi.online as example) and retrieve your store API token (add Store - APIKey Generate) and API_URL (https://pay.dhfi.online/api as example). 
 2. **Requirements** – To run the SDK, your system will need to have Python >= 3.7.
 3. **Install**
 
