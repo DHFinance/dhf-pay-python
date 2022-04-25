@@ -10,9 +10,5 @@ class PaymentIdDTO(BaseDto):
 
 @dataclass
 class PaymentDTO(BaseDto):
-    store: int
     amount: int
-    status: str
     comment: str
-    type: int
-    text: str

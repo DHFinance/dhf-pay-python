@@ -82,12 +82,8 @@ class TestPaymentClient(TestCase):
         payment_client = PaymentClient('http://example.com', token='xxxxx')
 
         response = payment_client.create_payment(payment=PaymentDTO(
-            store=2,
             amount=1234,
-            status='paid',
-            comment="test",
-            type=1,
-            text="test",
+            comment="test"
         ))
 
         self.assertEqual(response, payment_id)
