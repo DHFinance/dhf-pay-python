@@ -14,7 +14,7 @@ Local build:
 
 .. code-block::
 
-    python setup.py install
+    python setup.py install --user
 
 From PyPi:
 
