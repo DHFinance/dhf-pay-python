@@ -9,7 +9,7 @@ from dhf_wrapper.entities.transaction import TransactionPaymentDTO
 class TestIntegrationPaymentClient(TestCase):
     def setUp(self) -> None:
         self.token = os.getenv("TOKEN")
-        self.url = os.getenv("API_URL")
+        self.url = os.getenv("API_BASE_URL")
         self.client = PaymentClient(base_url=self.url, token=self.token)
 
     def test_positive_create_and_get_payment(self):

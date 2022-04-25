@@ -54,8 +54,22 @@ Usage
 
 Run tests
 ===============
+**To run unit tests:**
 
 .. code-block::
 
-    nosetests --verbosity=2 tests
+    nosetests --verbosity=2 tests/unit
 
+**To run integration tests set up environment variables:**
+
+::
+
+
+    TOKEN - Store API key.
+    API_BASE_URL - Base URL.
+
+**And then call for tests:**
+
+.. code-block::
+
+    nosetests --verbosity=2 tests/integration
