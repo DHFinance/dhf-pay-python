@@ -4,6 +4,8 @@ import requests
 from requests.auth import AuthBase
 from requests.exceptions import RequestException
 
+from dhf_wrapper.exceptions import HANDLED_ERRORS
+
 
 class BearerAuth(AuthBase):
     def __init__(self, token):
@@ -63,7 +65,8 @@ class ServiceClient:
         """
         try:
             with request(**kwargs) as resp:
-                resp.raise_for_status()
+                if resp.status_code not in HANDLED_ERRORS:
+                    resp.raise_for_status()
                 return resp.json()
         except RequestException as e:
             if retries > 0 and e.request.status >= 500:
