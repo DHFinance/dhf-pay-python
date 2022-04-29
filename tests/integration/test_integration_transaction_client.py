@@ -17,10 +17,10 @@ class TestIntegrationTransactionClient(TestCase):
 
     def test_negative_get_transactions_no_token_handle_401(self):
         client = TransactionClient(base_url=self.url, token="")
-        with self.assertRaises(DHFUserUnauthorized) as e:
-            response = client.get_transactions()
+        with self.assertRaises(DHFUserUnauthorized):
+            client.get_transactions()
 
     def test_negative_get_transactions_bad_url_handle_404(self):
         client = TransactionClient(base_url=self.url + "/api", token=self.token)
-        with self.assertRaises(DHFMethodNotFound) as e:
-            response = client.get_transactions()
+        with self.assertRaises(DHFMethodNotFound):
+            client.get_transactions()

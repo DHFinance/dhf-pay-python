@@ -37,38 +37,32 @@ class TestIntegrationPaymentClient(TestCase):
 
     def test_negative_get_payment_wrong_url_handle_404(self):
         client = PaymentClient(base_url=self.url + "/api", token="")
-        with self.assertRaises(DHFMethodNotFound) as e:
-            response = client.get_payments()
+        with self.assertRaises(DHFMethodNotFound):
+            client.get_payments()
 
     def test_negative_create_payment_bad_amount_handle_400(self):
         payment = PaymentDTO(amount=2, comment="Tips")
-        with self.assertRaises(DHFBadRequest) as e:
-            response = self.client.create_payment(payment=payment)
+        with self.assertRaises(DHFBadRequest):
+            self.client.create_payment(payment=payment)
 
     def test_negative_create_payment_no_token_handle_401(self):
         payment = PaymentDTO(amount=2500000000, comment="Tips")
         client = PaymentClient(base_url=self.url, token="")
-        with self.assertRaises(DHFUserUnauthorized) as e:
-            response = client.create_payment(payment)
+        with self.assertRaises(DHFUserUnauthorized):
+            client.create_payment(payment)
 
     def test_negative_create_payment_wrong_url_handle_404(self):
         payment = PaymentDTO(amount=2500000000, comment="Tips")
         client = PaymentClient(base_url=self.url + "/api", token=self.token)
-        with self.assertRaises(DHFMethodNotFound) as e:
-            response = client.create_payment(payment)
+        with self.assertRaises(DHFMethodNotFound):
+            client.create_payment(payment)
 
     def test_negative_get_payments_no_token_handle_400(self):
         client = PaymentClient(base_url=self.url, token="")
-        with self.assertRaises(DHFBadRequest) as e:
-            response = client.get_payments()
+        with self.assertRaises(DHFBadRequest):
+            client.get_payments()
 
     def test_negative_get_payments_wrong_url_handle_404(self):
         client = PaymentClient(base_url=self.url + '/api', token="")
-        with self.assertRaises(DHFMethodNotFound) as e:
-            response = client.get_payments()
-
-
-
-
-
-
+        with self.assertRaises(DHFMethodNotFound):
+            client.get_payments()

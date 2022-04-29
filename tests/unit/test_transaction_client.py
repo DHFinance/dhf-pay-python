@@ -15,13 +15,13 @@ class TestTransactionClient(TestCase):
         transactions = [{
             "data": [
                 {
-                "status": "processing",
-                "email": "kriruban1@gmail.com",
-                "updated": "2022-01-20 12:46:26.000",
-                "txHash": "16ae42729a88a4df9519a8e08807d68856070d93cf162898948b7de57e1a3368",
-                "payment": 2,
-                "sender": "01acdbbd933fd7aaedb7b1bd29c577027d86b5fafc422267a89fc386b7ebf420c9",
-                "amount": "2500000000"
+                    "status": "processing",
+                    "email": "kriruban1@gmail.com",
+                    "updated": "2022-01-20 12:46:26.000",
+                    "txHash": "16ae42729a88a4df9519a8e08807d68856070d93cf162898948b7de57e1a3368",
+                    "payment": 2,
+                    "sender": "01acdbbd933fd7aaedb7b1bd29c577027d86b5fafc422267a89fc386b7ebf420c9",
+                    "amount": "2500000000"
                 }
             ],
             "count": 0,
@@ -31,10 +31,11 @@ class TestTransactionClient(TestCase):
         }]
 
         mocked_session = mock.MagicMock()
-        mocked_session.__enter__.return_value = mock.MagicMock(get=mock.MagicMock(return_value=transactions), json=lambda: transactions)
+        mocked_session.__enter__.return_value = mock.MagicMock(get=mock.MagicMock(return_value=transactions),
+                                                               json=lambda: transactions)
         mock_get.return_value = mocked_session
 
-        transaction_client = TransactionClient(base_url='http://example.com', token='xxxxx')
+        transaction_client = TransactionClient(base_url='https://example.com', token='xxxxx')
 
         response = transaction_client.get_transactions(
             params=TransactionParamsDTO(limit=1)
@@ -44,29 +45,11 @@ class TestTransactionClient(TestCase):
 
     @patch.object(Session, 'get')
     def test_negative_getting_transactions_connection_error(self, mock_get):
-        transactions = [{
-            "data": [
-                {
-                "status": "processing",
-                "email": "kriruban1@gmail.com",
-                "updated": "2022-01-20 12:46:26.000",
-                "txHash": "16ae42729a88a4df9519a8e08807d68856070d93cf162898948b7de57e1a3368",
-                "payment": 2,
-                "sender": "01acdbbd933fd7aaedb7b1bd29c577027d86b5fafc422267a89fc386b7ebf420c9",
-                "amount": "2500000000"
-                }
-            ],
-            "count": 0,
-            "total": 0,
-            "page": 0,
-            "pageCount": 0
-        }]
-
         mock_get.side_effect = ConnectionError()
 
-        transaction_client = TransactionClient(base_url='http://example.com', token='xxxxx')
+        transaction_client = TransactionClient(base_url='https://example.com', token='xxxxx')
 
-        with self.assertRaises(ConnectionError) as e:
+        with self.assertRaises(ConnectionError):
             transaction_client.get_transactions(
                 params=TransactionParamsDTO(limit=1)
             )
@@ -82,11 +65,12 @@ class TestTransactionClient(TestCase):
         }
 
         mocked_session = mock.MagicMock()
-        mocked_session.__enter__.return_value = mock.MagicMock(get=mock.MagicMock(return_value=transactions_400), json=lambda: transactions_400)
+        mocked_session.__enter__.return_value = mock.MagicMock(get=mock.MagicMock(return_value=transactions_400),
+                                                               json=lambda: transactions_400)
         mock_get.return_value = mocked_session
-        transaction_client = TransactionClient(base_url='http://example.com', token='xxxxx')
+        transaction_client = TransactionClient(base_url='https://example.com', token='xxxxx')
 
-        with self.assertRaises(DHFBadRequest) as e:
+        with self.assertRaises(DHFBadRequest):
             transaction_client.get_transactions(
                 params=TransactionParamsDTO(limit=1)
             )
@@ -100,11 +84,12 @@ class TestTransactionClient(TestCase):
         }
 
         mocked_session = mock.MagicMock()
-        mocked_session.__enter__.return_value = mock.MagicMock(get=mock.MagicMock(return_value=transactions_401), json=lambda: transactions_401)
+        mocked_session.__enter__.return_value = mock.MagicMock(get=mock.MagicMock(return_value=transactions_401),
+                                                               json=lambda: transactions_401)
         mock_get.return_value = mocked_session
-        transaction_client = TransactionClient(base_url='http://example.com', token='xxxxx')
+        transaction_client = TransactionClient(base_url='https://example.com', token='xxxxx')
 
-        with self.assertRaises(DHFUserUnauthorized) as e:
+        with self.assertRaises(DHFUserUnauthorized):
             transaction_client.get_transactions(
                 params=TransactionParamsDTO(limit=1)
             )
@@ -118,11 +103,12 @@ class TestTransactionClient(TestCase):
         }
 
         mocked_session = mock.MagicMock()
-        mocked_session.__enter__.return_value = mock.MagicMock(get=mock.MagicMock(return_value=transactions_404), json=lambda: transactions_404)
+        mocked_session.__enter__.return_value = mock.MagicMock(get=mock.MagicMock(return_value=transactions_404),
+                                                               json=lambda: transactions_404)
         mock_get.return_value = mocked_session
-        transaction_client = TransactionClient(base_url='http://example.com', token='xxxxx')
+        transaction_client = TransactionClient(base_url='https://example.com', token='xxxxx')
 
-        with self.assertRaises(DHFMethodNotFound) as e:
+        with self.assertRaises(DHFMethodNotFound):
             transaction_client.get_transactions(
                 params=TransactionParamsDTO(limit=1)
             )
