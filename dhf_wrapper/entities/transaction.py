@@ -28,6 +28,7 @@ class TransactionPaymentDTO(BaseDto):
     comment: str
     type: int
     text: str
+    cancelled: bool
     store: StoreDTO
 
 
