@@ -48,9 +48,11 @@ Usage
 
     #Add new payment
     new_payment = payment_client.create_payment(payment=PaymentDTO(
-        amount=1234,
+        amount=2500000000,
         comment="test",
     ))
+
+Note: amount should be in motes, for exaple 1 cspr =  1000000000 in mots
 
 Run tests
 ===============
