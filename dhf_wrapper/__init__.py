@@ -3,4 +3,4 @@ __all__ = ('TransactionClient', 'PaymentClient',)
 from .client import TransactionClient, PaymentClient
 
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
