@@ -1,4 +1,4 @@
-##Envorements
+## Envorements
 
 To set up your own environment replace  them in Dockerfile in lines 
 
